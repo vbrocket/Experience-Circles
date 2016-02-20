@@ -1,5 +1,5 @@
 ﻿
-var expCircleApp = angular.module('expCircleApp', ['ngRoute']); // 'ngAnimate'
+var expCircleApp = angular.module('expCircleApp', ['ngRoute','ngTagsInput']); // 'ngAnimate'
 
 expCircleApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when("/Home", {

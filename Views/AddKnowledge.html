@@ -4,4 +4,42 @@
             <h1>Implement Add knowledge Page</h1>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <span>Title: </span>
+            <input type="text" data-ng-model="Knowledge.Title" placeholder="Paste Title Here" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <span>Description: </span>
+            <input type="text" data-ng-model="Knowledge.Description" placeholder="Paste Description Here" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <span>Tags: </span>
+            <tags-input ng-model="Knowledge.Tags"></tags-input>
+        </div>
+    </div>
+    
+    <div class="row">
+        <button ng-show="Knowledge.Steps.length <= 0" type="button" class="btn-primary" ng-click="AddNewStep()"> Add New Step </button>
+    </div>
+    <div class="row" ng-repeat="step in Knowledge.Steps">
+        <div class="col-lg-8">
+            <input type="text" data-ng-model="step.Content" placeholder="Paste Content Here" />
+        </div>
+        <div class="col-lg-4">
+            <button type="button" class="btn-primary" ng-click="AddNewStep(step)"> + </button>
+            <button type="button" class="btn-primary" ng-click="RemoveNewStep(step)"> - </button>
+        <span>{{step.StepType}}</span>
+            <button type="button" class="btn-success" ng-click="SetStepType(step , 1)"> Text </button>
+            <button type="button" class="btn-success" ng-click="SetStepType(step , 2)"> Code </button>
+            <button type="button" class="btn-success" ng-click="SetStepType(step , 3)"> Image </button>
+            <button type="button" class="btn-success" ng-click="SetStepType(step , 4)"> Link </button>
+        </div></div>
 </div>
