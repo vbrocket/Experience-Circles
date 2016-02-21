@@ -1,8 +1,9 @@
 ﻿'use strict';
-expCircleApp.controller('KnowledgeListController', ['$scope', function ($scope) {
-
+expCircleApp.controller('KnowledgeListController', ['$scope','$http', function ($scope,$http) {
+ $scope.WSLink = "WS/WS.php?";
     // init main page model
-    $scope.Knowledges = [
+	 $scope.Knowledges=[];
+    $scope.xxx = [
         {
             Id: "0",
             Title: "bug1",
@@ -26,5 +27,9 @@ expCircleApp.controller('KnowledgeListController', ['$scope', function ($scope) 
         }
     ];
 
-
+    $scope.GetKnowledges =function(){  $http.get(  $scope.WSLink+"WS=GetKnowledges"   ).then(function(res){
+	   
+	   $scope.Knowledges= JSON.parse(res.data);
+	}) }; 
+ $scope.GetKnowledges();	
 }]);

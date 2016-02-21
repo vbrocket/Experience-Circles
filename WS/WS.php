@@ -16,8 +16,8 @@ switch ($ws) {
 
         break;
 		 
-    case "GetMyKnowledges":
-        $KnowledgesArr = $db->GetMyKnowledges($ACID=0);
+    case "GetKnowledges":
+        $KnowledgesArr = $db->GetKnowledges($ACID=0);
 
         echo json_encode($KnowledgesArr, JSON_UNESCAPED_UNICODE);
 

@@ -9,7 +9,7 @@ class DBHelper
     public $password = "r00t";
     public $dbname = "coda";
     
-    public function GetMyKnowledges($ACID)
+    public function GetKnowledges($ACID)
     {
         // Create connection
         $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
@@ -24,8 +24,13 @@ class DBHelper
         
         if ($result->num_rows > 0) {
             
-            while ($row = $result->fetch_array(MYSQL_ASSOC)) {
-                $ArrayKnowledges[] = $row;
+            while ($row = $result->fetch_array(MYSQL_ASSOC)) { 
+				   $ArrayKnowledges[]  = array( 'Id' => $row["ID"] ,
+				   'Title' =>  $row["Title"] ,
+				   'Description' =>  $row["Description"] ,
+                'Steps' => $this->GetKnowledgeSteps($row["ID"]),
+                'Tags' => $this->GetKnowledgeTags($row["ID"])
+            );
             }
             return json_encode($ArrayKnowledges);
         } else {
@@ -176,6 +181,63 @@ VALUES ( " . $knowledgeID . " , " . $step->StepType . " ,'" . $step->StepContent
         }
          $conn->close();
     }
+	
+	
+	  public function GetKnowledgeSteps($knowledgeID)
+    {
+        // Create connection
+        $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+		$ArraySteps =  array();
+     
+            $sql = "SELECT knowledgeID,   StepTypeID ,  Content , clientGUID FROM knowledgeSteps WHERE knowledgeID= " . $knowledgeID;
+            
+            $result = $conn->query($sql);
+            
+            if ($result->num_rows > 0) {
+                
+                  while ($row = $result->fetch_array(MYSQL_ASSOC)) {
+                $ArraySteps[] = $row;
+            }
+			}else{
+				return ;
+			} 
+		
+         $conn->close();
+		 return  $ArraySteps;
+    }
+	
+	  public function GetKnowledgeTags($knowledgeID)
+    {
+        // Create connection
+        $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+		$ArrayTags =  array();
+       
+            $sql = "SELECT TagName,   Tags.TagID  FROM knowledgeTags inner join Tags on 
+			knowledgeTags.TagID=Tags.TagID WHERE knowledgeTags.knowledgeID= " . $knowledgeID;
+          
+            $result = $conn->query($sql);
+            
+            if ($result->num_rows > 0) {
+                
+                  while ($row = $result->fetch_array(MYSQL_ASSOC)) {
+                $ArrayTags[] = $row;
+            }
+            }else{
+				return ;
+			} 
+       
+		
+         $conn->close();
+		 return  $ArrayTags;
+    }
     public function DeleteKnowledge($id)
     {
         // Create connection
@@ -318,7 +380,7 @@ VALUES ( '" . $Tag->text . "' ,  0   )";
                 
                 
                 $sql = "INSERT INTO knowledgeTags ( knowledgeID,   TagID )
-VALUES ( " . $knowledgeID . " , " . $Tag->TagID    . "')";
+VALUES ( " . $knowledgeID . " , " . $Tag->TagID    . " )";
                 
                 if ($conn->query($sql) === TRUE) {
                   
@@ -331,7 +393,7 @@ VALUES ( " . $knowledgeID . " , " . $Tag->TagID    . "')";
 			else{
 				$TagID= $this->AddNewTag($Tag);
                 $sql = "INSERT INTO knowledgeTags ( knowledgeID,   TagID )
-VALUES ( " . $knowledgeID . " , " .$TagID    . "')";
+VALUES ( " . $knowledgeID . " , " .$TagID    . " )";
                 
                 if ($conn->query($sql) === TRUE) {
                   
