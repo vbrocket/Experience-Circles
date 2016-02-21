@@ -45,6 +45,8 @@ body {
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   z-index: 10;
+  background: rgba(68, 68, 68, 0.35);
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(246,246,246,0) 1%,rgba(68,68,68,0.35) 20%,rgba(68,68,68,0.35) 80%,rgba(255,255,255,0) 100%);
 }
 
 /* Declare heights because of positioning of img element */
