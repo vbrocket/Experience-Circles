@@ -1,6 +1,7 @@
 ﻿'use strict';
 expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
 
+  $scope.WSLink = "WS/WS.php?";
     // Create GUID to use with server side syncing
     $scope.getGUID = function () {
         function s4() {
@@ -14,11 +15,12 @@ expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', '$timeout'
 
     // init main page model
     $scope.Knowledge = {
-        Id: 0,
+        KnowledgeGUID: $scope.getGUID(),
         Title: "",
         Description: "",
         Steps: [{ Id: $scope.getGUID(), StepType: 1, StepContent: "" }],
-        Tags: [{"text":'Bug'}]
+        Tags: [{"text":'Bug',"TagID":0,   "IsSystemTag":false}],
+		IsSolved:true
     };
     
     // Add New Step
@@ -59,7 +61,7 @@ expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', '$timeout'
     $scope.SetStepType = function (curStep, stepType) {
         curStep.StepType = stepType;
     }
-    $scope.baseImageURL = "http://uaksf21ce9f5.ashrafelazoomy4.koding.io/WS/";
+    $scope.baseImageURL = "WS/";
     $scope.OnTextFieldPaste = function (event , curStep) {
         //console.log(e);
         var clipData = event.clipboardData;
@@ -72,7 +74,7 @@ expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', '$timeout'
                 var fd = new FormData();
                 fd.append('file', img);
                 // CHANGE /post/paste TO YOUR OWN FILE RECEIVER
-                $http.post("http://uaksf21ce9f5.ashrafelazoomy4.koding.io/WS/WSSaveImage.php", fd, {
+                $http.post("WS/WSSaveImage.php", fd, {
                     transformRequest: angular.identity,
                     headers: {
                         'Content-Type': undefined
@@ -114,8 +116,32 @@ expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', '$timeout'
         }
         return false;
     }
+$scope.loadTags = function(query) { 
+ return $http.get(  $scope.WSLink+"WS=FindTag&TagName="+query  ).then(function(res){
+	   
+	  return JSON.parse(res.data);
+  }) ; 
+};
 
 
+
+$scope.SaveKnowldge=function () {
+                                         
+                                        $http({
+                                            method: 'POST',
+                                            url:  $scope.WSLink +  "WS=AddNewKnowledge",
+                                            data: $scope.Knowledge,
+                                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                        }).
+                                                success(function (response) {
+                                                   
+
+                                                }).
+                                                error(function (response) { 
+                                                });
+                                        return false;
+                                    };
+ 
 
 
 }]);

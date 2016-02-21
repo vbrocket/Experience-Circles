@@ -19,8 +19,8 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="Knowledge.Title">Knowledge Tags</label>
-                        <tags-input ng-model="Knowledge.Tags">
-                            
+                        <tags-input ng-model="Knowledge.Tags"    >
+                              <auto-complete source="loadTags($query)"></auto-complete>
                         </tags-input>
                     </div>
                 </div>
@@ -69,6 +69,7 @@
                             </div>
                         </div>
                 </div>
+				<button type="button" ng-click="SaveKnowldge();" class="btn btn-default">Submit</button>
             </div>
         </div>
     </div>
