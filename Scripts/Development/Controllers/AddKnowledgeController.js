@@ -1,5 +1,5 @@
 ﻿'use strict';
-expCircleApp.controller('AddKnowledgeController', ['$scope', function ($scope) {
+expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', function ($scope, $http) {
 
     // Create GUID to use with server side syncing
     $scope.getGUID = function () {
@@ -49,6 +49,53 @@ expCircleApp.controller('AddKnowledgeController', ['$scope', function ($scope) {
     $scope.SetStepType = function (curStep, stepType) {
         curStep.StepType = stepType;
     }
-    
+
+    $scope.OnTextFieldPaste = function (event , curStep) {
+        //console.log(e);
+        var clipData = event.clipboardData;
+        angular.forEach(clipData.items, function (item, key) {
+            if (clipData.items[key]['type'].match(/image.*/)) {
+                curStep.StepType = 3;
+                // if it is a image
+                var img = clipData.items[key].getAsFile();
+                console.log('A image sized ' + img.size + ' is being uploaded.');
+                var fd = new FormData();
+                fd.append('file', img);
+                // CHANGE /post/paste TO YOUR OWN FILE RECEIVER
+                $http.post("/post/paste", fd, {
+                    transformRequest: angular.identity,
+                    headers: {
+                        'Content-Type': undefined
+                    }
+                }).success(function (url) {
+                    $scope.body = $scope.body + '\n![PICTURE](' + url + ')';
+                    // the url returns
+                }).error(function (data) {
+                    alert(data);
+                });
+            }
+            else {
+                var text = event.clipboardData.getData('text/plain');
+                //detect if it's link
+                if ($scope.validateURL(text))
+                {
+                    curStep.StepType = 4;
+                }
+                
+            }
+        });
+
+        $scope.AddNewStep();
+    };
+
+    // check URL
+    $scope.validateURL = function (link) {
+        if (link && link.trim().length != 0) {
+            var regexp = /((ftp|https?):\/\/)?(www\.)?[a-z0-9\-\.]{3,}\.[a-z]{2,6}(:[0-9]{1,5})?(\/.*)?$/
+            var result = regexp.test(link);
+            return result;
+        }
+        return false;
+    }
 
 }]);

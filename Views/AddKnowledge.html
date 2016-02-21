@@ -1,45 +1,76 @@
 ﻿<div class="container">
     <div class="row">
         <div class="col-lg-4">
-            <h1>Implement Add knowledge Page</h1>
+            <h1>.</h1>
         </div>
     </div>
+    <div class="panel panel-default">
 
-    <div class="row">
-        <div class="col-lg-4">
-            <span>Title: </span>
-            <input type="text" data-ng-model="Knowledge.Title" placeholder="Paste Title Here" />
-        </div>
-    </div>
+        <div class="panel-heading">Knowledge main data</div>
+        <div class="panel-body">
+            <div class="form">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Knowledge.Title">Knowledge Title</label>
+                        <input type="text" class="form-control" data-ng-model="Knowledge.Title" placeholder="Paste Title Here" />
+                    </div>
+                </div>
 
-    <div class="row">
-        <div class="col-lg-4">
-            <span>Description: </span>
-            <input type="text" data-ng-model="Knowledge.Description" placeholder="Paste Description Here" />
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-4">
-            <span>Tags: </span>
-            <tags-input ng-model="Knowledge.Tags"></tags-input>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Knowledge.Title">Knowledge Tags</label>
+                        <tags-input ng-model="Knowledge.Tags"></tags-input>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="Knowledge.Title">Knowledge Description</label>
+                        <input type="text" class="form-control" data-ng-model="Knowledge.Description" placeholder="Paste Description Here" />
+                    </div>
+                </div>
+                </div>
         </div>
     </div>
     
-    <div class="row">
-        <button ng-show="Knowledge.Steps.length <= 0" type="button" class="btn-primary" ng-click="AddNewStep()"> Add New Step </button>
-    </div>
-    <div class="row" ng-repeat="step in Knowledge.Steps">
-        <div class="col-lg-8">
-            <input type="text" data-ng-model="step.Content" placeholder="Paste Content Here" />
+
+
+
+
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">Knowledge main data</div>
+        <div class="panel-body">
+            <div class="form">
+                <span>{{knowledge.steps.length}}</span>
+                <div class="form-group" ng-show="Knowledge.Steps.length <= 0">
+                    <button type="button" class="btn btn-lg btn-primary" ng-click="AddNewStep()"> Add New Step </button>
+                </div>
+
+                <div class="form-horizontal" ng-repeat="step in Knowledge.Steps">
+
+                    <div class="form-group has-success">
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" data-ng-model="step.Content" placeholder="Paste Content Here" ng-paste="OnTextFieldPaste($event,step)" />
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="button" class="btn btn-primary" ng-click="AddNewStep(step)"> + </button>
+                            <button type="button" class="btn btn-primary" ng-click="RemoveNewStep(step)"> - </button>
+                            <span>{{step.StepType}}</span>
+                            <button type="button" ng-class="{'btn-success' : step.StepType == 1}" class="btn btn-default" ng-click="SetStepType(step , 1)"> Text </button>
+                            <button type="button" ng-class="{'btn-success' : step.StepType == 2}" class="btn btn-default" ng-click="SetStepType(step , 2)"> Code </button>
+                            <button type="button" ng-class="{'btn-success' : step.StepType == 3}" class="btn btn-default" ng-click="SetStepType(step , 3)"> Image </button>
+                            <button type="button" ng-class="{'btn-success' : step.StepType == 4}" class="btn btn-default" ng-click="SetStepType(step , 4)"> Link </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4">
-            <button type="button" class="btn-primary" ng-click="AddNewStep(step)"> + </button>
-            <button type="button" class="btn-primary" ng-click="RemoveNewStep(step)"> - </button>
-        <span>{{step.StepType}}</span>
-            <button type="button" class="btn-success" ng-click="SetStepType(step , 1)"> Text </button>
-            <button type="button" class="btn-success" ng-click="SetStepType(step , 2)"> Code </button>
-            <button type="button" class="btn-success" ng-click="SetStepType(step , 3)"> Image </button>
-            <button type="button" class="btn-success" ng-click="SetStepType(step , 4)"> Link </button>
-        </div></div>
+    </div>
+    
+
+
+
+
+    
 </div>
