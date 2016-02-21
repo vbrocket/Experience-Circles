@@ -1,5 +1,5 @@
 ﻿'use strict';
-expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', function ($scope, $http) {
+expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
 
     // Create GUID to use with server side syncing
     $scope.getGUID = function () {
@@ -45,11 +45,21 @@ expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', function (
         }
     }
 
+    // Remove Step
+    $scope.SetStepContent = function (Id, content) {
+        for (var i = 0; i < $scope.Knowledge.Steps.length; i++) {
+            if ($scope.Knowledge.Steps[i].Id == Id) {
+                $scope.Knowledge.Steps[i].StepContent = content;
+                return;
+            }
+        }
+    }
+
     // Set Step Type
     $scope.SetStepType = function (curStep, stepType) {
         curStep.StepType = stepType;
     }
-
+    $scope.baseImageURL = "http://uaksf21ce9f5.ashrafelazoomy4.koding.io/WS/";
     $scope.OnTextFieldPaste = function (event , curStep) {
         //console.log(e);
         var clipData = event.clipboardData;
@@ -62,13 +72,19 @@ expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', function (
                 var fd = new FormData();
                 fd.append('file', img);
                 // CHANGE /post/paste TO YOUR OWN FILE RECEIVER
-                $http.post("/post/paste", fd, {
+                $http.post("http://uaksf21ce9f5.ashrafelazoomy4.koding.io/WS/WSSaveImage.php", fd, {
                     transformRequest: angular.identity,
                     headers: {
                         'Content-Type': undefined
                     }
                 }).success(function (url) {
-                    $scope.body = $scope.body + '\n![PICTURE](' + url + ')';
+                    curStep.StepContent = $scope.baseImageURL + url.trim();
+                    //var timer = $timeout(function () {
+                    //    $timeout.cancel(timer);
+                    //    $scope.SetStepContent(curStep.Id, url.trim());
+                    //}, 1);
+                    
+                    //$scope.body = $scope.body + '\n![PICTURE](' + url + ')';
                     // the url returns
                 }).error(function (data) {
                     alert(data);
@@ -85,7 +101,8 @@ expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', function (
             }
         });
 
-        $scope.AddNewStep();
+        if(curStep.StepContent == "")
+            $scope.AddNewStep();
     };
 
     // check URL
@@ -97,5 +114,8 @@ expCircleApp.controller('AddKnowledgeController', ['$scope', '$http', function (
         }
         return false;
     }
+
+
+
 
 }]);

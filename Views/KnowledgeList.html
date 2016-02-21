@@ -1,9 +1,15 @@
 ﻿<div class="container">
-    <div class="row">
-        <div class="col-lg-4">
             <h1>Implement KnowledgeList</h1>
-            <h1>{{ddd}}</h1>
-            <input type="text" data-ng-model="ccc" />
+    <div class="panel panel-primary" ng-repeat="Knowledge in Knowledges">
+        <div class="panel-heading">{{Knowledge.Title}}</div>
+        <div class="panel-body">
+            <div>Number of Steps : {{Knowledge.Steps.length}}</div>
+            <p>
+                {{Knowledge.Description}}
+            </p>
+            <a class="btn btn-default" ng-repeat="tag in Knowledge.Tags" href="#">{{tag}}</a>
+            
         </div>
     </div>
 </div>
+

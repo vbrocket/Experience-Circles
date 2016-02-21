@@ -19,7 +19,9 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="Knowledge.Title">Knowledge Tags</label>
-                        <tags-input ng-model="Knowledge.Tags"></tags-input>
+                        <tags-input ng-model="Knowledge.Tags">
+                            
+                        </tags-input>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -50,19 +52,22 @@
                 <div class="form-horizontal" ng-repeat="step in Knowledge.Steps">
 
                     <div class="form-group has-success">
-                        <div class="col-lg-8">
-                            <input type="text" class="form-control" data-ng-model="step.Content" placeholder="Paste Content Here" ng-paste="OnTextFieldPaste($event,step)" />
+                        <div ng-class="{'col-lg-6': step.StepType == 3 }" class="col-lg-8">
+                            <textarea type="text" class="form-control" data-ng-model="step.StepContent" placeholder="Paste Content Here" ng-paste="OnTextFieldPaste($event,step)"></textarea>
                         </div>
-                        <div class="col-lg-4">
-                            <button type="button" class="btn btn-primary" ng-click="AddNewStep(step)"> + </button>
-                            <button type="button" class="btn btn-primary" ng-click="RemoveNewStep(step)"> - </button>
-                            <span>{{step.StepType}}</span>
-                            <button type="button" ng-class="{'btn-success' : step.StepType == 1}" class="btn btn-default" ng-click="SetStepType(step , 1)"> Text </button>
-                            <button type="button" ng-class="{'btn-success' : step.StepType == 2}" class="btn btn-default" ng-click="SetStepType(step , 2)"> Code </button>
-                            <button type="button" ng-class="{'btn-success' : step.StepType == 3}" class="btn btn-default" ng-click="SetStepType(step , 3)"> Image </button>
-                            <button type="button" ng-class="{'btn-success' : step.StepType == 4}" class="btn btn-default" ng-click="SetStepType(step , 4)"> Link </button>
+                        <div class="col-lg-2" ng-if="step.StepType == 3">
+                            <img ng-src="{{step.StepContent}}" width="100px" height="100px" />
                         </div>
-                    </div>
+                            <div class="col-lg-4">
+                                <button type="button" class="btn btn-primary" ng-click="AddNewStep(step)"> + </button>
+                                <button type="button" class="btn btn-primary" ng-click="RemoveNewStep(step)"> - </button>
+                                <span>{{step.StepType}}</span>
+                                <button type="button" ng-class="{'btn-success' : step.StepType == 1}" class="btn btn-default" ng-click="SetStepType(step , 1)"> Text </button>
+                                <button type="button" ng-class="{'btn-success' : step.StepType == 2}" class="btn btn-default" ng-click="SetStepType(step , 2)"> Code </button>
+                                <button type="button" ng-class="{'btn-success' : step.StepType == 3}" class="btn btn-default" ng-click="SetStepType(step , 3)"> Image </button>
+                                <button type="button" ng-class="{'btn-success' : step.StepType == 4}" class="btn btn-default" ng-click="SetStepType(step , 4)"> Link </button>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
