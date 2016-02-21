@@ -1,3 +1,7 @@
+## Introduction
+Stack overflow is not enough, almost all the time you have a bigger puzzle to solve and you collect your solution pieces from multiple sources of information, and at the end you will have your own experience, which you miss to write down or sometimes you are lazy like me and don't write it. 
+Here comes our idea which focus on helping you adding your solution steps on the cloud in a very easy way, to not make this process painful and just a copy/paste operation including pictures (works on google chrome browser only for now) and it will organize your data in simple steps with some tags to help you recall this experience easily in the future and will allow you to share this with others too like your colleagues or public share.
+
 ## Experience-Circles
 stackoverflow is not enough...
 finding a solution and sometimes try to search later for it again ?
