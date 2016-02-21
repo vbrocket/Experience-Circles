@@ -21,6 +21,7 @@ Our idea is to save your knowledge, time and space to collect it in one place fo
 AngularJs - https://angularjs.org/
 Bootstrap - http://getbootstrap.com/
 ngTagsInput - http://mbenford.github.io/ngTagsInput/
+highlightjs - https://highlightjs.org
 
 ## Contributors
 
