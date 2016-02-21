@@ -44,13 +44,19 @@
             <div class="form">
               <div class="form-horizontal" ng-repeat="step in Knowledge.Steps">
 
-                  <p ng-if="step.StepType == 1">{{step.StepContent}}</p>
-
-                  <p ng-if="step.StepType == 2">{{step.StepContent}}</p>
-
-                  <img ng-if="step.StepType == 3" ng-src="{{step.StepContent}}" />
+                  <div class="panel panel-default">
+                      <div class="panel-body">
+                          <p ng-if="step.StepType == 1">{{step.StepContent}}</p>
+                          <!--<p ng-if="step.StepType == 2">{{step.StepContent}}</p>-->
+                          <!--<div ng-if="step.StepType == 2"></div>-->
+                          <pre ng-if="step.StepType == 2"><code class="html">{{step.StepContent}}</code></pre>
+                          <img ng-if="step.StepType == 3" ng-src="{{step.StepContent}}" />
+                          <a ng-if="step.StepType == 4" target="_blank" ng-href="{{step.StepContent}}">{{step.StepContent}}</a>
+                      </div>
+                  </div>
                   
-                  <a ng-if="step.StepType == 4" target="_blank" ng-href="{{step.StepContent}}" >{{step.StepContent}}</a>
+
+
         
                 </div>
             </div>

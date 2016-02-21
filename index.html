@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en" ng-app="expCircleApp">
 <head>
@@ -38,6 +38,8 @@
     <link href="Scripts/ng-tags-input/ng-tags-input.css" rel="stylesheet" />
     <link href="Scripts/ng-tags-input/ng-tags-input.bootstrap.css" rel="stylesheet" />
     <script src="Scripts/ng-tags-input/ng-tags-input.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
 
     <!--Angular App Files -->
     <script src="Scripts/Development/app.js"></script>
@@ -45,6 +47,7 @@
     <script src="Scripts/Development/Controllers/AddKnowledgeController.js"></script>
     <script src="Scripts/Development/Controllers/KnowledgeListController.js"></script>
     <script src="Scripts/Development/Controllers/ReadKnowledgeController.js"></script>
+
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -61,27 +64,14 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Project name</a>
+                        <a class="navbar-brand" style="padding: 3px;" href="#"><img src="Content/images/ex-circles-logo2.png" alt="Logo"></a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#/Home">Home</a></li>
                             <li><a href="#/AddKnowledge">Add Knowledge</a></li>
                             <li><a href="#/KnowledgeList">My Knowledge List</a></li>
-                            <li><a href="#/ReadKnowledge">Read Knowledget</a></li>
-                            
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="#/ReadKnowledge">Read Knowledge</a></li>
                         </ul>
                     </div>
                 </div>
@@ -103,5 +93,6 @@
     <script src="Content/bootstrap-3.3.6-dist/js/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="Content/bootstrap-3.3.6-dist/js/ie10-viewport-bug-workaround.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
