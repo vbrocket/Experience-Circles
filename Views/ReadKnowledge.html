@@ -1,0 +1,65 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <h1>.</h1>
+        </div>
+    </div>
+    <div class="panel panel-default">
+
+        <div class="panel-heading">Knowledge main data</div>
+        <div class="panel-body">
+            <div class="form">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Knowledge.Title">Knowledge Title</label>
+                        <label data-ng-model="Knowledge.Title">{{Knowledge.Title}}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Knowledge.Title">Knowledge Tags</label>
+                        <a class="btn btn-default" ng-repeat="tag in Knowledge.Tags" href="#">{{tag}}</a>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="Knowledge.Title">Knowledge Description</label>
+                        <label data-ng-model="Knowledge.Description">{{Knowledge.Description}}</label>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">Knowledge Details</div>
+        <div class="panel-body">
+            <div class="form">
+              <div class="form-horizontal" ng-repeat="step in Knowledge.Steps">
+
+                  <p ng-if="step.StepType == 1">{{step.StepContent}}</p>
+
+                  <p ng-if="step.StepType == 2">{{step.StepContent}}</p>
+
+                  <img ng-if="step.StepType == 3" ng-src="{{step.StepContent}}" />
+                  
+                  <a ng-if="step.StepType == 4" target="_blank" ng-href="{{step.StepContent}}" >{{step.StepContent}}</a>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+    
+</div>
