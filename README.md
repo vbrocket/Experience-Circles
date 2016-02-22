@@ -13,8 +13,13 @@ wish to take screenshot for each step that descripe all you need ?
 this project do all that and it aims to save your knowledge, time and space to collect it in one place for you to get it when you want it.
 
 ## Motivation
+
 Better , organized and profitional cloud store.
 Our idea is to save your knowledge, time and space to collect it in one place for you to get it when you want it.
+
+## How To Use
+
+http://uaksf21ce9f5.ashrafelazoomy4.koding.io/help.html
 
 ## API Reference
 
