@@ -22,6 +22,7 @@ AngularJs - https://angularjs.org/
 Bootstrap - http://getbootstrap.com/
 ngTagsInput - http://mbenford.github.io/ngTagsInput/
 highlightjs - https://highlightjs.org
+toastr - https://github.com/CodeSeven/toastr
 
 ## Contributors
 
