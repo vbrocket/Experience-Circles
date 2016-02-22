@@ -39,6 +39,35 @@ class DBHelper
         $conn->close();
     }
     
+	  public function GetKnowledge($KnowledgeID)
+    {
+        // Create connection
+        $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        
+        $sqlMyKnowledges = "select ID, Title,   Description ,  IsSolved , clientGUID  from knowledge where ID=".$KnowledgeID;
+        $result          = $conn->query($sqlMyKnowledges);
+        $ArrayKnowledges = array();
+        
+        if ($result->num_rows > 0) {
+            
+            while ($row = $result->fetch_array(MYSQL_ASSOC)) { 
+				   $ArrayKnowledges[]  = array( 'Id' => $row["ID"] ,
+				   'Title' =>  $row["Title"] ,
+				   'Description' =>  $row["Description"] ,
+                'Steps' => $this->GetKnowledgeSteps($row["ID"]),
+                'Tags' => $this->GetKnowledgeTags($row["ID"])
+            );
+            }
+            return json_encode($ArrayKnowledges);
+        } else {
+            return "[]";
+        }
+        $conn->close();
+    }
 	public function GetKnowledgesBySearch($Text)
     {
         // Create connection

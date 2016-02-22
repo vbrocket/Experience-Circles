@@ -22,6 +22,14 @@ switch ($ws) {
         echo json_encode($KnowledgesArr, JSON_UNESCAPED_UNICODE);
 
         break;
+		 case "GetKnowledge":
+		 $KnowledgeID = $_REQUEST["KnowledgeID"];
+        $KnowledgeArr = $db->GetKnowledge($KnowledgeID);
+
+        echo json_encode($KnowledgeArr, JSON_UNESCAPED_UNICODE);
+
+        break;
+		 
 		 case "FindTag":
 		 $TagName = $_REQUEST["TagName"];
         $TagsArr = $db->FindTag($TagName);

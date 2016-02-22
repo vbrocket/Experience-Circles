@@ -19,7 +19,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="Knowledge.Title">Knowledge Tags</label>
-                        <a class="btn btn-default" ng-repeat="tag in Knowledge.Tags" href="#">{{tag}}</a>
+                        <a class="btn btn-default" ng-repeat="tag in Knowledge.Tags" href="#">{{tag.TagName}}</a>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -46,12 +46,12 @@
 
                   <div class="panel panel-default">
                       <div class="panel-body">
-                          <p ng-if="step.StepType == 1">{{step.StepContent}}</p>
-                          <!--<p ng-if="step.StepType == 2">{{step.StepContent}}</p>-->
-                          <!--<div ng-if="step.StepType == 2"></div>-->
-                          <pre ng-if="step.StepType == 2"><code class="html">{{step.StepContent}}</code></pre>
-                          <img ng-if="step.StepType == 3" ng-src="{{step.StepContent}}" />
-                          <a ng-if="step.StepType == 4" target="_blank" ng-href="{{step.StepContent}}">{{step.StepContent}}</a>
+                          <p ng-if="step.StepTypeID == 1">{{step.Content}}</p>
+                          <!--<p ng-if="step.StepTypeID == 2">{{step.Content}}</p>-->
+                          <!--<div ng-if="step.StepTypeID == 2"></div>-->
+                          <pre ng-if="step.StepTypeID == 2"><code class="html">{{step.Content}}</code></pre>
+                          <img ng-if="step.StepTypeID == 3" ng-src="{{step.Content}}" />
+                          <a ng-if="step.StepTypeID == 4" target="_blank" ng-href="{{step.Content}}">{{step.Content}}</a>
                       </div>
                   </div>
                   

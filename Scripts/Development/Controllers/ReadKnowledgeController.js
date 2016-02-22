@@ -1,6 +1,6 @@
 ﻿'use strict';
-expCircleApp.controller('ReadKnowledgeController', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
-
+expCircleApp.controller('ReadKnowledgeController', ['$scope', '$http', '$timeout','$routeParams', function ($scope, $http, $timeout,$routeParams) {
+$scope.WSLink = "WS/WS.php?";
     // Create GUID to use with server side syncing
     $scope.getGUID = function () {
         function s4() {
@@ -11,9 +11,10 @@ expCircleApp.controller('ReadKnowledgeController', ['$scope', '$http', '$timeout
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
           s4() + '-' + s4() + s4() + s4();
     }
-
+$scope.KnowledgeID=$routeParams.KnowledgeID;
     // init main page model
-    $scope.Knowledge = {
+	 $scope.Knowledge = {};
+    $scope.XXXXX = {
         Id: 0,
         Title: "This is a test knowledge title",
         Description: "My knowledge description goes here",
@@ -21,7 +22,11 @@ expCircleApp.controller('ReadKnowledgeController', ['$scope', '$http', '$timeout
         Tags: ['Bug', 'Java' , 'MVC']
     };
 
-
+    $scope.GetKnowledge =function(){  $http.get(  $scope.WSLink+"WS=GetKnowledge&KnowledgeID="+$scope.KnowledgeID   ).then(function(res){
+	   
+	   $scope.Knowledge= JSON.parse(res.data)[0];
+	}) }; 
+ $scope.GetKnowledge();	
 
 
 

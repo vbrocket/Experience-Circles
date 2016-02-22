@@ -1,7 +1,7 @@
 ﻿<div class="container">
             <h1>Implement KnowledgeList</h1>
     <div class="panel panel-primary" ng-repeat="Knowledge in Knowledges">
-        <div class="panel-heading">{{Knowledge.Title}}</div>
+      <a href="#/ReadKnowledge/{{Knowledge.Id}}">  <div class="panel-heading">  {{Knowledge.Title}}</div> </a>
         <div class="panel-body">
             <div>Number of Steps : {{Knowledge.Steps.length}}</div>
             <p>

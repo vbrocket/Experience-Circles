@@ -11,9 +11,9 @@ expCircleApp.config(['$routeProvider', function ($routeProvider) {
     }).when("/KnowledgeList", {
         controller: "KnowledgeListController",
         templateUrl: "/Views/KnowledgeList.html"
-    }).when("/ReadKnowledge", {
+        }).when("/ReadKnowledge/:KnowledgeID", {
         controller: "ReadKnowledgeController",
         templateUrl: "/Views/ReadKnowledge.html"
-    }).otherwise({ redirectTo: "/Home" });
+        }).otherwise({ redirectTo: "/Home" });
 
 }]);

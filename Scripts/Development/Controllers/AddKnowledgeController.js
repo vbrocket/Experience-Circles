@@ -134,8 +134,16 @@ $scope.SaveKnowldge=function () {
                                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                         }).
                                                 success(function (response) {
-                                                   
-
+                                                    toastr.success('Saved!', 'Opreation Complete');
+$scope.Knowledge = {
+        KnowledgeGUID: $scope.getGUID(),
+        Title: "",
+        Description: "",
+        Steps: [{ Id: $scope.getGUID(), StepType: 1, StepContent: "" }],
+        Tags: [{"text":'Bug',"TagID":0,   "IsSystemTag":false}],
+		IsSolved:true
+    };
+    
                                                 }).
                                                 error(function (response) { 
                                                 });
